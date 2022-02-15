@@ -1,0 +1,8 @@
+# Craft Together plugin configuration
+
+########## Craft Core ##########
+discordToken: "your discord token"
+
+
+########## DO NOT TOUCH ##########
+configVersion: 1

@@ -1,0 +1,5 @@
+name: CraftCore
+description: Craft Together plugin library
+version: '${version}'
+main: xyz.crafttogether.craftcore.CraftCore
+api-version: 1.18
