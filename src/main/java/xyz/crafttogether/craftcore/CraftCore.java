@@ -20,6 +20,7 @@ public class CraftCore extends JavaPlugin {
         plugin = this;
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        ConfigHandler.loadConfig();
         try {
             jda = JDABuilder.createLight(ConfigHandler.getConfig().getDiscordToken())
                     .build()
