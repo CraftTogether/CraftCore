@@ -5,3 +5,9 @@ main: xyz.crafttogether.craftcore.CraftCore
 api-version: 1.18
 
 commands:
+  verify:
+    description: verify the linking of your discord account to your minecraft account
+    usage: /<command> <code>
+  unlink:
+    description: Unlink your discord account from your minecraft account
+    usage: /<command>

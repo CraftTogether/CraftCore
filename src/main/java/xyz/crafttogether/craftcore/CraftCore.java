@@ -16,6 +16,8 @@ import xyz.crafttogether.craftcore.discord.VerifyCode;
 import xyz.crafttogether.craftcore.discord.VerifyExpireTask;
 import xyz.crafttogether.craftcore.discord.commands.LinkCommand;
 import xyz.crafttogether.craftcore.discord.commands.UnlinkCommand;
+import xyz.crafttogether.craftcore.minecraft.commands.MinecraftUnlinkCommand;
+import xyz.crafttogether.craftcore.minecraft.commands.VerifyCommand;
 
 import javax.security.auth.login.LoginException;
 import java.util.HashMap;
@@ -47,6 +49,11 @@ public class CraftCore extends JavaPlugin {
             e.printStackTrace();
             unload();
         }
+
+        // Minecraft command registering
+        getCommand("verify").setExecutor(new VerifyCommand());
+        getCommand("unlink").setExecutor(new MinecraftUnlinkCommand());
+
         // command handler
         addListeners(new DiscordCommandHandler());
 
