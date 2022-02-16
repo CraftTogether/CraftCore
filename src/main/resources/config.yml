@@ -1,8 +1,14 @@
 # Craft Together plugin configuration
 
 ########## Craft Core ##########
+# Your discord token for the discord bot within your discord server
 discordToken: "your discord token"
 
+# How long (in seconds) the verification code will last until expiring, by default it is 120 seconds (2 minutes)
+verifyExpireDelay: 120
+
+# How long (in seconds) between each check to see whether a code has expired, this should be smaller than verifyExpireDelay
+verifyCheckDelay: 60
 
 ########## DO NOT TOUCH ##########
 configVersion: 1

@@ -8,8 +8,10 @@ public class Config {
     private static final Logger logger = LoggerFactory.getLogger(Config.class);
     private final int configVersion;
     private final String discordToken;
+    private final long verifyExpireDelay;
+    private final long verifyCheckDelay;
 
-    public Config(int configVersion, String discordToken) {
+    public Config(int configVersion, String discordToken, long verifyExpireDelay, long verifyCheckDelay) {
         try {
             assert (discordToken != null);
         } catch (AssertionError e) {
@@ -18,6 +20,8 @@ public class Config {
         }
         this.configVersion = configVersion;
         this.discordToken = discordToken;
+        this.verifyExpireDelay = verifyExpireDelay * 1000;
+        this.verifyCheckDelay = verifyCheckDelay * 1000;
     }
 
     public int getConfigVersion() {
@@ -26,5 +30,13 @@ public class Config {
 
     public String getDiscordToken() {
         return discordToken;
+    }
+
+    public long getVerifyExpireDelay() {
+        return verifyExpireDelay;
+    }
+
+    public long getVerifyCheckDelay() {
+        return verifyCheckDelay;
     }
 }

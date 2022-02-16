@@ -22,7 +22,9 @@ public class ConfigHandler {
         FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
         config = new Config(
                 fc.getInt("configVersion"),
-                fc.getString("discordToken")
+                fc.getString("discordToken"),
+                fc.getLong("verifyExpireDelay"),
+                fc.getLong("verifyCheckDelay")
         );
     }
 
