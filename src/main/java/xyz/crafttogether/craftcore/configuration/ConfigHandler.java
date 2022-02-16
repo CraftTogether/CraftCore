@@ -31,7 +31,7 @@ public class ConfigHandler {
         logger.warn("Config version outdated, generating new config");
         file.delete();
         CraftCore.getPlugin().getConfig().options().copyDefaults();
-        CraftCore.getPlugin().saveConfig();
+        CraftCore.getPlugin().saveDefaultConfig();
         CraftCore.unload();
     }
 
