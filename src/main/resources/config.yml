@@ -2,7 +2,7 @@
 
 ########## Craft Core ##########
 # Your discord token for the discord bot within your discord server
-discordToken: "your discord token"
+discordToken:
 
 # How long (in seconds) the verification code will last until expiring, by default it is 120 seconds (2 minutes)
 verifyExpireDelay: 120
@@ -10,5 +10,50 @@ verifyExpireDelay: 120
 # How long (in seconds) between each check to see whether a code has expired, this should be smaller than verifyExpireDelay
 verifyCheckDelay: 60
 
+########## Chat Bridge ##########
+# THe ID of the discord server which contains the channel you would like to bridge with the minecraft server
+discordGuildId:
+
+# The ID of the channel which you would like to bridge with the minecraft server
+discordChannelId:
+
+# A webhook within the same channel as the minecraft server is bridged to
+discordWebhook:
+
+# Set whether the IRC connection is enabled (setting it to false disables IRC functionality)
+ircEnabled: true
+
+# The username of the IRC bot
+ircUsername: MCBridge
+
+# The hostname or IP of the irc server
+ircHostname:
+
+# The port which the IRC server is listening on, 6667 is default for non-tls, 6697 is default for tls encryption
+ircPort: 6697
+
+# Whether TLS encryption will be used to connect to the IRC server (RECOMMENDED)
+ircUseTls: true
+
+# Number of seconds the client will wait to attempt to connect to the IRC server before timing out (not recommended to change)
+ircTimeout: 5
+
+# The name of the IRC channel you would like to bridge with the minecraft server, hashtag prefix automatically added
+ircChannel:
+
+# The number of attempts the plugin will attempt to reconnect to the IRC server automatically
+ircReconnectAttempts: 10
+
+# The delay (in seconds) between reconnect attempts
+ircReconnectDelay: 10
+
+# Prefix for IRC commands
+ircCommandPrefix: $
+
+# prefixes for messages sent to discord
+minecraftPrefix: "[Minecraft]:"
+
+ircPrefix: "[IRC]:"
+
 ########## DO NOT TOUCH ##########
-configVersion: 1
+configVersion: 2

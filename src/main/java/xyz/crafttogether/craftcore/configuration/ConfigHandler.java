@@ -24,7 +24,22 @@ public class ConfigHandler {
                 fc.getInt("configVersion"),
                 fc.getString("discordToken"),
                 fc.getLong("verifyExpireDelay"),
-                fc.getLong("verifyCheckDelay")
+                fc.getLong("verifyCheckDelay"),
+                fc.getLong("discordGuildId"),
+                fc.getLong("discordChannelId"),
+                fc.getString("discordWebhook"),
+                fc.getBoolean("ircEnabled"),
+                fc.getString("ircUsername"),
+                fc.getString("ircHostname"),
+                fc.getInt("ircPort"),
+                fc.getBoolean("ircUseTls"),
+                fc.getInt("ircTimeout"),
+                fc.getString("ircChannel"),
+                fc.getInt("ircReconnectAttempts"),
+                fc.getInt("ircReconnectDelay"),
+                fc.getString("ircCommandPrefix"),
+                fc.getString("minecraftPrefix"),
+                fc.getString("ircPrefix")
         );
     }
 
