@@ -1,5 +1,7 @@
 # Craft Together plugin configuration
 
+# any plugins which you have not installed, ignore the configuration section for
+
 ########## Craft Core ##########
 # Your discord token for the discord bot within your discord server
 discordToken:
