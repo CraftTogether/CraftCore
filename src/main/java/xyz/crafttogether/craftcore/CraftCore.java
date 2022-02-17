@@ -19,6 +19,7 @@ import xyz.crafttogether.craftcore.discord.commands.UnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.MinecraftUnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.VerifyCommand;
 
+import javax.annotation.Nullable;
 import javax.security.auth.login.LoginException;
 import java.util.HashMap;
 import java.util.Map;
@@ -148,5 +149,10 @@ public class CraftCore extends JavaPlugin {
             }
         }
         return Optional.empty();
+    }
+
+    @Nullable
+    public static DiscordCommand getDiscordCommand(String commandName) {
+        return discordCommands.getOrDefault(commandName, null);
     }
 }
