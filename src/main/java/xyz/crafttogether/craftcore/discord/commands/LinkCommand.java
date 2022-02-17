@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import xyz.crafttogether.craftcore.CraftCore;
+import xyz.crafttogether.craftcore.connector.AccountConnector;
 import xyz.crafttogether.craftcore.discord.DiscordCommand;
 import xyz.crafttogether.craftcore.discord.VerifyCode;
 
@@ -18,6 +19,12 @@ public class LinkCommand implements DiscordCommand {
     public void invoke(SlashCommandInteractionEvent event) {
         if (CraftCore.doesCodeAlreadyExists(event.getUser().getIdLong())) {
             event.reply("You have already been given a verification code which is still valid, check your dms")
+                    .setEphemeral(true)
+                    .queue();
+            return;
+        }
+        if (AccountConnector.containsAccount(event.getUser().getIdLong())) {
+            event.reply("You have already linked your discord account to your minecraft account, use ```/unlink```")
                     .setEphemeral(true)
                     .queue();
             return;
