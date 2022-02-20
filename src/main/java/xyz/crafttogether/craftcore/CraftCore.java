@@ -72,6 +72,7 @@ public class CraftCore extends JavaPlugin {
     @Override
     public void onDisable() {
         timer.cancel();
+        jda.shutdown();
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "CraftCore unloaded");
     }
 
