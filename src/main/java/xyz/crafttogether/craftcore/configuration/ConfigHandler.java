@@ -34,7 +34,7 @@ public class ConfigHandler {
                 fc.getInt("ircPort"),
                 fc.getBoolean("ircUseTls"),
                 fc.getInt("ircTimeout"),
-                fc.getString("ircChannel"),
+                "#" + fc.getString("ircChannel"),
                 fc.getInt("ircReconnectAttempts"),
                 fc.getInt("ircReconnectDelay"),
                 fc.getString("ircCommandPrefix"),
