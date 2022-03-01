@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import xyz.crafttogether.craftcore.configuration.ConfigHandler;
 import xyz.crafttogether.craftcore.connector.AccountConnection;
@@ -18,6 +19,8 @@ import xyz.crafttogether.craftcore.discord.commands.LinkCommand;
 import xyz.crafttogether.craftcore.discord.commands.UnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.MinecraftUnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.VerifyCommand;
+import xyz.crafttogether.craftcore.minecraft.listeners.PlayerMove;
+import xyz.crafttogether.craftcore.minecraft.listeners.PlayerMoveBlock;
 import xyz.crafttogether.craftcore.minecraft.utils.Warmup;
 import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
@@ -54,6 +57,7 @@ public class CraftCore extends JavaPlugin {
         // Minecraft command registering
         getCommand("verify").setExecutor(new VerifyCommand());
         getCommand("unlink").setExecutor(new MinecraftUnlinkCommand());
+        registerEvents();
 
         // command handler
         addListeners(new DiscordCommandHandler());
@@ -168,5 +172,11 @@ public class CraftCore extends JavaPlugin {
     @Nullable
     public static DiscordCommand getDiscordCommand(String commandName) {
         return discordCommands.getOrDefault(commandName, null);
+    }
+
+    private void registerEvents() {
+        PluginManager manager = plugin.getServer().getPluginManager();
+        manager.registerEvents(new PlayerMove(), this);
+        manager.registerEvents(new PlayerMoveBlock(), this);
     }
 }
