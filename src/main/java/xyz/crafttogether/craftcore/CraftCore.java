@@ -18,13 +18,12 @@ import xyz.crafttogether.craftcore.discord.commands.LinkCommand;
 import xyz.crafttogether.craftcore.discord.commands.UnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.MinecraftUnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.VerifyCommand;
+import xyz.crafttogether.craftcore.minecraft.utils.Warmup;
+import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
 import javax.annotation.Nullable;
 import javax.security.auth.login.LoginException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Timer;
+import java.util.*;
 
 public class CraftCore extends JavaPlugin {
     private static JavaPlugin plugin;
@@ -34,7 +33,8 @@ public class CraftCore extends JavaPlugin {
     public static final HashMap<Long, VerifyCode> verify = new HashMap<>();
 
     // verification checking
-    private static Timer timer;
+    private static Timer verificationTimer;
+    private static Timer warmupTimer;
 
     @Override
     public void onEnable() {
@@ -63,15 +63,28 @@ public class CraftCore extends JavaPlugin {
         addDiscordCommand(new UnlinkCommand());
 
         // verification code checking
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new VerifyExpireTask(), 0L, ConfigHandler.getConfig().getVerifyCheckDelay());
+        verificationTimer = new Timer();
+        verificationTimer.scheduleAtFixedRate(new VerifyExpireTask(), 0L, ConfigHandler.getConfig().getVerifyCheckDelay());
+
+        warmupTimer = new Timer();
+        warmupTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
+                    if (warmup.getWarmup() + warmup.getScheduledTime() > System.currentTimeMillis() / 1000) {
+                        warmup.getCallback().callback(true);
+                    }
+                }
+            }
+        }, 0, 1000);
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "CraftCore loaded");
     }
 
     @Override
     public void onDisable() {
-        timer.cancel();
+        verificationTimer.cancel();
+        warmupTimer.cancel();
         jda.shutdown();
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "CraftCore unloaded");
     }
