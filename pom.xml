@@ -70,7 +70,7 @@
     <distributionManagement>
         <repository>
             <id>polarian-repo</id>
-            <url>https://repo.polarian.dev/repo</url>
+            <url>https://repo.polarian.dev/</url>
         </repository>
     </distributionManagement>
 
