@@ -17,6 +17,10 @@ public class PlayerMoveBlockEvent extends Event {
         return player;
     }
 
+    public static HandlerList getHandlersList() {
+        return HANDLERS;
+    }
+
     @Override
     public @NotNull HandlerList getHandlers() {
         return HANDLERS;
