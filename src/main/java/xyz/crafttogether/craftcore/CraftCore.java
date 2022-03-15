@@ -95,7 +95,7 @@ public class CraftCore extends JavaPlugin {
                     }
                 }
             }
-        }, 0, 1000);
+        }, 0, 20);
 
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "CraftCore loaded");
     }
