@@ -12,6 +12,7 @@ public class PlayerMoveBlock implements Listener {
         for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
             if (warmup.getPlayer().getUniqueId().equals(event.getPlayer().getUniqueId())) {
                 warmup.getCallback().callback(false);
+                WarmupHandler.removeWarmup(warmup);
             }
         }
     }

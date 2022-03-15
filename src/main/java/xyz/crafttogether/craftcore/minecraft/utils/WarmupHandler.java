@@ -18,4 +18,8 @@ public class WarmupHandler {
     public static List<Warmup> getCommandWarmups() {
         return commandWarmups;
     }
+
+    public static void removeWarmup(Warmup warmup) {
+        commandWarmups.remove(warmup);
+    }
 }

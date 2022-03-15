@@ -91,6 +91,7 @@ public class CraftCore extends JavaPlugin {
                 for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
                     if (warmup.getWarmup() + warmup.getScheduledTime() > System.currentTimeMillis() / 1000) {
                         warmup.getCallback().callback(true);
+                        WarmupHandler.removeWarmup(warmup);
                     }
                 }
             }
