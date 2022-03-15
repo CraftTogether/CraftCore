@@ -35,6 +35,7 @@ public class DataHandler {
 
     public static void reload() {
         serverConfig = YamlConfiguration.loadConfiguration(serverFile);
+        userConfig = YamlConfiguration.loadConfiguration(userFile);
     }
 
     @Nullable
