@@ -9,7 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.crafttogether.craftcore.configuration.ConfigHandler;
+import xyz.crafttogether.craftcore.data.DataHandler;
 import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
 public class SpawnCommand implements CommandExecutor {
@@ -20,7 +20,10 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) commandSender;
-        String spawn = ConfigHandler.getConfig().getServerSpawn();
+        String spawn = DataHandler.getSpawnLocation();
+        if (spawn == null) {
+            p.sendMessage(ChatColor.RED + "The has been no spawn set on the server");
+        }
         String[] coords = spawn.split(",");
         long x = Long.parseLong(coords[0]);
         long y = Long.parseLong(coords[1]);

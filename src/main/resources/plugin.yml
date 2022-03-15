@@ -14,3 +14,11 @@ commands:
   spawn:
     description: Teleports you to spawn
     usage: /<command>
+  setspawn:
+    description: Sets the server world spawn
+    usage: /<command>
+
+permissions:
+  craftcore.setspawn:
+    description: Allows a user to set the server spawn
+    default: false
