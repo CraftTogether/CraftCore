@@ -5,8 +5,17 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Event which is invoked when a players xyz position changes
+ */
 public class PlayerMoveBlockEvent extends Event {
+    /**
+     * The list of handlers
+     */
     private static final HandlerList HANDLERS = new HandlerList();
+    /**
+     * The player whose position has changed
+     */
     private final Player player;
 
     public PlayerMoveBlockEvent(Player player) {

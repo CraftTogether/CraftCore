@@ -8,7 +8,16 @@ import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
 import java.util.Iterator;
 
+/**
+ * Listener which listens for a players change in xyz position
+ */
 public class PlayerMoveBlock implements Listener {
+
+    /**
+     * Handler which is invoked when a players xyz position has changed
+     *
+     * @param event The PlayerMoveBlockEvent object
+     */
     @EventHandler
     public void playerMoveBlockEvent(PlayerMoveBlockEvent event) {
         Iterator<Warmup> it = WarmupHandler.getCommandWarmups().iterator();

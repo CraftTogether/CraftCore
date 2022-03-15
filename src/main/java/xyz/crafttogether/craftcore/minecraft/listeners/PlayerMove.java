@@ -9,8 +9,17 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import xyz.crafttogether.craftcore.CraftCore;
 import xyz.crafttogether.craftcore.minecraft.events.PlayerMoveBlockEvent;
 
+/**
+ * Listener which listens for player movement
+ */
 public class PlayerMove implements Listener {
-    @EventHandler(priority = EventPriority.HIGHEST)
+
+    /**
+     * Handler which is invoked when a player moves on the server
+     *
+     * @param event The PlayerMoveEvent object
+     */
+    @EventHandler(priority = EventPriority.HIGH)
     public void OnPlayerMoveEvent(PlayerMoveEvent event) {
         Location al = event.getTo();
         Location bf = event.getFrom();
