@@ -21,7 +21,7 @@ public class AccountConnector {
     private static final Logger logger = LoggerFactory.getLogger(AccountConnector.class);
     private static final String PATH = CraftCore.getPlugin().getDataFolder() + "/accounts.json";
     private static List<AccountConnection> accounts = new ArrayList<>();
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public static void loadAccounts() {
         Path path = Path.of(PATH);
@@ -35,7 +35,8 @@ public class AccountConnector {
             }
         }
         try (FileReader reader = new FileReader(PATH)) {
-            Type type = new TypeToken<List<AccountConnection>>(){}.getType();
+            Type type = new TypeToken<List<AccountConnection>>() {
+            }.getType();
             accounts = gson.fromJson(reader, type);
         } catch (IOException e) {
             logger.error("Failed to get accounts from accounts.json");

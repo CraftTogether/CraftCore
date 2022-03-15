@@ -33,7 +33,7 @@ public class DataHandler {
     }
 
     public static void setSpawnLocation(Location spawnLocation) {
-        config.set("spawn", spawnLocation.getBlockX() + "," +  spawnLocation.getBlockY() + "," + spawnLocation.getBlockZ());
+        config.set("spawn", spawnLocation.getBlockX() + "," + spawnLocation.getBlockY() + "," + spawnLocation.getBlockZ());
         try {
             config.save(file);
         } catch (IOException e) {

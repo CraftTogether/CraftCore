@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.crafttogether.craftcore.configuration.ConfigHandler;
@@ -36,15 +35,74 @@ import java.io.IOException;
 import java.util.*;
 
 public class CraftCore extends JavaPlugin {
+    public static final HashMap<Long, VerifyCode> verify = new HashMap<>();
     private static final Logger logger = LoggerFactory.getLogger(CraftCore.class);
-    private static JavaPlugin plugin;
-    private static JDA jda;
     private static final int CONFIG_VERSION = 1;
     private static final HashMap<String, DiscordCommand> discordCommands = new HashMap<>();
-    public static final HashMap<Long, VerifyCode> verify = new HashMap<>();
-
+    private static JavaPlugin plugin;
+    private static JDA jda;
     // verification checking
     private static Timer verificationTimer;
+
+    public static JavaPlugin getPlugin() {
+        return plugin;
+    }
+
+    public static int getRequiredConfigVersion() {
+        return CONFIG_VERSION;
+    }
+
+    public static void unload() {
+        getPlugin().getPluginLoader().disablePlugin(getPlugin());
+    }
+
+    public static JDA getJda() {
+        return jda;
+    }
+
+    public static void addListeners(EventListener... eventListeners) {
+        if (jda != null) {
+            for (EventListener listener : eventListeners) {
+                jda.addEventListener(listener);
+            }
+        }
+    }
+
+    public static void addDiscordCommand(DiscordCommand command) {
+        getJda().upsertCommand(command.getCommandName(), command.getCommandDescription()).queue();
+        discordCommands.put(command.getCommandName(), command);
+    }
+
+    public static boolean doesCodeAlreadyExists(long discordId) {
+        return verify.containsKey(discordId);
+    }
+
+    public static void addVerifyCode(long discordId, VerifyCode code) {
+        verify.putIfAbsent(discordId, code);
+    }
+
+    public static HashMap<Long, VerifyCode> getVerificationCodes() {
+        return verify;
+    }
+
+    public static void removeVerificationCode(long discordId) {
+        verify.remove(discordId);
+    }
+
+    public static Optional<Long> verifyCode(String code) {
+        for (Map.Entry<Long, VerifyCode> entry : verify.entrySet()) {
+            if (entry.getValue().getCode().equals(code)) {
+                removeVerificationCode(entry.getKey());
+                return Optional.of(entry.getKey());
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Nullable
+    public static DiscordCommand getDiscordCommand(String commandName) {
+        return discordCommands.getOrDefault(commandName, null);
+    }
 
     @Override
     public void onEnable() {
@@ -110,30 +168,6 @@ public class CraftCore extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "CraftCore unloaded");
     }
 
-    public static JavaPlugin getPlugin() {
-        return plugin;
-    }
-
-    public static int getRequiredConfigVersion() {
-        return CONFIG_VERSION;
-    }
-
-    public static void unload() {
-        getPlugin().getPluginLoader().disablePlugin(getPlugin());
-    }
-
-    public static JDA getJda() {
-        return jda;
-    }
-
-    public static void addListeners(EventListener... eventListeners) {
-        if (jda != null) {
-            for (EventListener listener : eventListeners) {
-                jda.addEventListener(listener);
-            }
-        }
-    }
-
     public Optional<AccountConnection> getAccount(AccountType type, String filter) {
         switch (type) {
             case DISCORD -> {
@@ -153,42 +187,6 @@ public class CraftCore extends JavaPlugin {
             }
         }
         return Optional.empty();
-    }
-
-    public static void addDiscordCommand(DiscordCommand command) {
-        getJda().upsertCommand(command.getCommandName(), command.getCommandDescription()).queue();
-        discordCommands.put(command.getCommandName(), command);
-    }
-
-    public static boolean doesCodeAlreadyExists(long discordId) {
-        return verify.containsKey(discordId);
-    }
-
-    public static void addVerifyCode(long discordId, VerifyCode code) {
-        verify.putIfAbsent(discordId, code);
-    }
-
-    public static HashMap<Long, VerifyCode> getVerificationCodes() {
-        return verify;
-    }
-
-    public static void removeVerificationCode(long discordId) {
-        verify.remove(discordId);
-    }
-
-    public static Optional<Long> verifyCode(String code) {
-        for (Map.Entry<Long, VerifyCode> entry : verify.entrySet()) {
-            if (entry.getValue().getCode().equals(code)) {
-                removeVerificationCode(entry.getKey());
-                return Optional.of(entry.getKey());
-            }
-        }
-        return Optional.empty();
-    }
-
-    @Nullable
-    public static DiscordCommand getDiscordCommand(String commandName) {
-        return discordCommands.getOrDefault(commandName, null);
     }
 
     private void registerEvents() {

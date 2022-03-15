@@ -32,7 +32,9 @@ public class SpawnCommand implements CommandExecutor {
         long y = Long.parseLong(coords[1]);
         long z = Long.parseLong(coords[2]);
         Location location = new Location(Bukkit.getWorld("world"), x, y, z);
-        if (p.hasPermission("craftcore.spawn.ignoredelay") || p.isOp())
+        if (p.hasPermission("craftcore.spawn.ignoredelay") || p.isOp()) {
+            p.teleport(location);
+        } else {
             WarmupHandler.schedule(p, 5, (successful -> {
                 if (successful) {
                     p.teleport(location);
@@ -41,6 +43,7 @@ public class SpawnCommand implements CommandExecutor {
                     p.sendMessage(ChatColor.RED + "You moved, teleportation cancelled");
                 }
             }));
+        }
         return true;
     }
 }

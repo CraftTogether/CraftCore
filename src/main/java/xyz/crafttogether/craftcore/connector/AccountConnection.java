@@ -1,8 +1,8 @@
 package xyz.crafttogether.craftcore.connector;
 
 public class AccountConnection {
-    private long discordId;
-    private String minecraftUUID;
+    private final long discordId;
+    private final String minecraftUUID;
 
     public AccountConnection(long discordId, String minecraftUUID) {
         this.discordId = discordId;

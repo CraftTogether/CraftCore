@@ -30,7 +30,7 @@ public class LinkCommand implements DiscordCommand {
             return;
         }
         event.getUser().openPrivateChannel().queue(privateChannel -> {
-            VerifyCode code = new VerifyCode(Long.toHexString(new Random().nextInt(1000, 9999)).toString(), System.currentTimeMillis());
+            VerifyCode code = new VerifyCode(Long.toHexString(new Random().nextInt(1000, 9999)), System.currentTimeMillis());
             CraftCore.addVerifyCode(event.getUser().getIdLong(), code);
             final MessageEmbed embed = new EmbedBuilder()
                     .setTitle("Verification")
