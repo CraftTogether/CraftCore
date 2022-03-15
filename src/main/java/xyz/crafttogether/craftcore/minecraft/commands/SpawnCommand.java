@@ -34,6 +34,7 @@ public class SpawnCommand implements CommandExecutor {
         Location location = new Location(Bukkit.getWorld("world"), x, y, z);
         if (p.hasPermission("craftcore.spawn.ignoredelay") || p.isOp()) {
             p.teleport(location);
+            p.sendMessage(ChatColor.GREEN + "You have been teleported to spawn");
         } else {
             WarmupHandler.schedule(p, 5, (successful -> {
                 if (successful) {
