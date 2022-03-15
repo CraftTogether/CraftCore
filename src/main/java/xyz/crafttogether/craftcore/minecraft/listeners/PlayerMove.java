@@ -15,7 +15,7 @@ public class PlayerMove implements Listener {
         Location al = event.getTo();
         Location bf = event.getFrom();
         if (al.getBlockX() - bf.getBlockX() != 0 || al.getBlockY() - bf.getBlockY() != 0 || al.getBlockZ() - bf.getBlockZ() != 0) {
-            Bukkit.getScheduler().runTaskAsynchronously(CraftCore.getPlugin(), () -> {
+            Bukkit.getScheduler().runTask(CraftCore.getPlugin(), () -> {
                 Bukkit.getPluginManager().callEvent(new PlayerMoveBlockEvent(event.getPlayer()));
             });
         }
