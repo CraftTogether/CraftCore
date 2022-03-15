@@ -13,12 +13,12 @@ public class PlayerMoveBlockEvent extends Event {
         this.player = player;
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public static HandlerList getHandlerList() {
         return HANDLERS;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     @Override

@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class WarmupHandler {
     private static final List<Warmup> commandWarmups = new ArrayList<>();

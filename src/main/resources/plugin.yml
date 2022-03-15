@@ -20,5 +20,11 @@ commands:
 
 permissions:
   craftcore.setspawn:
-    description: Allows a user to set the server spawn
+    description: Allows a player to set the server spawn
     default: false
+  craftcore.spawn.skipwarmup:
+    description: Allows a player to skip the spawn command warmup
+    default: false
+  craftcore.spawn:
+    description: Teleports the player to spawn
+    default: true

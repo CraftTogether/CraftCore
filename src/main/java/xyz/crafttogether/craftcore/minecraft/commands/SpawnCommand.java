@@ -8,7 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import xyz.crafttogether.craftcore.CraftCore;
 import xyz.crafttogether.craftcore.data.DataHandler;
 import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
@@ -20,6 +19,10 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) commandSender;
+        if (!p.hasPermission("craftcore.spawn")) {
+            p.sendMessage(ChatColor.RED + "You do not have permission to use this command");
+            return true;
+        }
         String spawn = DataHandler.getSpawnLocation();
         if (spawn == null) {
             p.sendMessage(ChatColor.RED + "The has been no spawn set on the server");
@@ -29,14 +32,15 @@ public class SpawnCommand implements CommandExecutor {
         long y = Long.parseLong(coords[1]);
         long z = Long.parseLong(coords[2]);
         Location location = new Location(Bukkit.getWorld("world"), x, y, z);
-        WarmupHandler.schedule(p, 5, (successful -> {
-            if (successful) {
-                p.teleport(location);
-                p.sendMessage(ChatColor.GREEN + "You have been teleported to spawn");
-            } else {
-                p.sendMessage(ChatColor.RED + "You moved, teleportation cancelled");
-            }
-        }));
+        if (p.hasPermission("craftcore.spawn.ignoredelay") || p.isOp())
+            WarmupHandler.schedule(p, 5, (successful -> {
+                if (successful) {
+                    p.teleport(location);
+                    p.sendMessage(ChatColor.GREEN + "You have been teleported to spawn");
+                } else {
+                    p.sendMessage(ChatColor.RED + "You moved, teleportation cancelled");
+                }
+            }));
         return true;
     }
 }

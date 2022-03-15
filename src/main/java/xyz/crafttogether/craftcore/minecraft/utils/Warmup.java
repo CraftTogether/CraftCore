@@ -3,10 +3,10 @@ package xyz.crafttogether.craftcore.minecraft.utils;
 import org.bukkit.entity.Player;
 
 public class Warmup {
-    private Player player;
     private final int warmup;
     private final long scheduledTime;
     private final WarmupCallback callback;
+    private final Player player;
 
     public Warmup(Player player, int warmup, WarmupCallback callback, long scheduledTime) {
         this.player = player;
