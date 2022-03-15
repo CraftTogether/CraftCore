@@ -7,10 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.crafttogether.craftcore.configuration.ConfigHandler;
 import xyz.crafttogether.craftcore.connector.AccountConnection;
 import xyz.crafttogether.craftcore.connector.AccountConnector;
 import xyz.crafttogether.craftcore.connector.AccountType;
+import xyz.crafttogether.craftcore.data.DataHandler;
 import xyz.crafttogether.craftcore.discord.DiscordCommand;
 import xyz.crafttogether.craftcore.discord.DiscordCommandHandler;
 import xyz.crafttogether.craftcore.discord.VerifyCode;
@@ -28,9 +31,11 @@ import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
 import javax.annotation.Nullable;
 import javax.security.auth.login.LoginException;
+import java.io.IOException;
 import java.util.*;
 
 public class CraftCore extends JavaPlugin {
+    private static final Logger logger = LoggerFactory.getLogger(CraftCore.class);
     private static JavaPlugin plugin;
     private static JDA jda;
     private static final int CONFIG_VERSION = 1;
@@ -47,6 +52,12 @@ public class CraftCore extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         ConfigHandler.loadConfig();
+        try {
+            DataHandler.load();
+        } catch (IOException e) {
+            logger.error("Failed to load data");
+            e.printStackTrace();
+        }
         try {
             jda = JDABuilder.createLight(ConfigHandler.getConfig().getDiscordToken())
                     .build()

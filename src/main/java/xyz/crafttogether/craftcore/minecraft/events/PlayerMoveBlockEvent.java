@@ -17,7 +17,7 @@ public class PlayerMoveBlockEvent extends Event {
         return player;
     }
 
-    public static HandlerList getHandlersList() {
+    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
