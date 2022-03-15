@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.crafttogether.craftcore.configuration.ConfigHandler;
@@ -44,7 +45,6 @@ public class CraftCore extends JavaPlugin {
 
     // verification checking
     private static Timer verificationTimer;
-    private static Timer warmupTimer;
 
     @Override
     public void onEnable() {
@@ -85,8 +85,7 @@ public class CraftCore extends JavaPlugin {
         verificationTimer = new Timer();
         verificationTimer.scheduleAtFixedRate(new VerifyExpireTask(), 0L, ConfigHandler.getConfig().getVerifyCheckDelay());
 
-        warmupTimer = new Timer();
-        warmupTimer.scheduleAtFixedRate(new TimerTask() {
+        Bukkit.getScheduler().runTaskTimer(this, new TimerTask() {
             @Override
             public void run() {
                 for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
@@ -103,7 +102,7 @@ public class CraftCore extends JavaPlugin {
     @Override
     public void onDisable() {
         verificationTimer.cancel();
-        warmupTimer.cancel();
+        Bukkit.getScheduler().cancelTasks(this);
         jda.shutdown();
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "CraftCore unloaded");
     }
