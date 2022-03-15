@@ -20,10 +20,7 @@ import xyz.crafttogether.craftcore.discord.VerifyCode;
 import xyz.crafttogether.craftcore.discord.VerifyExpireTask;
 import xyz.crafttogether.craftcore.discord.commands.LinkCommand;
 import xyz.crafttogether.craftcore.discord.commands.UnlinkCommand;
-import xyz.crafttogether.craftcore.minecraft.commands.MinecraftUnlinkCommand;
-import xyz.crafttogether.craftcore.minecraft.commands.SetSpawnCommand;
-import xyz.crafttogether.craftcore.minecraft.commands.SpawnCommand;
-import xyz.crafttogether.craftcore.minecraft.commands.VerifyCommand;
+import xyz.crafttogether.craftcore.minecraft.commands.*;
 import xyz.crafttogether.craftcore.minecraft.listeners.PlayerMove;
 import xyz.crafttogether.craftcore.minecraft.listeners.PlayerMoveBlock;
 import xyz.crafttogether.craftcore.minecraft.utils.Warmup;
@@ -130,6 +127,8 @@ public class CraftCore extends JavaPlugin {
         getCommand("unlink").setExecutor(new MinecraftUnlinkCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("setspawn").setExecutor(new SetSpawnCommand());
+        getCommand("home").setExecutor(new HomeCommand());
+        getCommand("sethome").setExecutor(new SetHomeCommand());
         registerEvents();
 
         // command handler

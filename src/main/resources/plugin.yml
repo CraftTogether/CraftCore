@@ -17,6 +17,12 @@ commands:
   setspawn:
     description: Sets the server world spawn
     usage: /<command>
+  home:
+    description: Teleport to your home
+    usage: /<command>
+  sethome:
+    description: Set your home to your current location
+    usage: /<command>
 
 permissions:
   craftcore.setspawn:
@@ -27,4 +33,13 @@ permissions:
     default: false
   craftcore.spawn:
     description: Teleports the player to spawn
+    default: true
+  craftcore.home:
+    description: Allows the player to teleport to their home
+    default: true
+  craftcore.home.skipwarmup:
+    description: Allows the player to skip the teleportation warmup
+    default: false
+  craftcore.sethome:
+    description: Allows the player to set their home to their current location
     default: true
