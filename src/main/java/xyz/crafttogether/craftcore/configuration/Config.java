@@ -29,12 +29,13 @@ public class Config {
     private final String ircCommandPrefix;
     private final String minecraftPrefix;
     private final String ircPrefix;
+    private final String serverSpawn;
 
     public Config(int configVersion, String discordToken, long verifyExpireDelay, long verifyCheckDelay,
                   long discordGuildId, long discordChannelId, String discordWebhook, boolean ircEnabled,
                   String ircUsername, String ircHostname, int ircPort, boolean ircUseTls, int ircTimeout,
                   String ircChannel, int ircReconnectAttempts, int ircReconnectDelay, String ircCommandPrefix,
-                  String minecraftPrefix, String ircPrefix) {
+                  String minecraftPrefix, String ircPrefix, String serverSpawn) {
         try {
             // CraftCore
             assert (discordToken != null);
@@ -47,6 +48,7 @@ public class Config {
             assert (ircCommandPrefix != null);
             assert (minecraftPrefix != null);
             assert (ircPrefix != null);
+            assert (serverSpawn != null);
         } catch (AssertionError e) {
             logger.error("Invalid CraftCore config");
             CraftCore.unload();
@@ -56,6 +58,7 @@ public class Config {
         this.discordToken = discordToken;
         this.verifyExpireDelay = verifyExpireDelay * 1000;
         this.verifyCheckDelay = verifyCheckDelay * 1000;
+        this.serverSpawn = serverSpawn;
 
         // Chat Bridge
         this.discordGuildId = discordGuildId;
@@ -149,5 +152,9 @@ public class Config {
 
     public String getIrcPrefix() {
         return ircPrefix;
+    }
+
+    public String getServerSpawn() {
+        return serverSpawn;
     }
 }

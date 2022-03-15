@@ -39,7 +39,8 @@ public class ConfigHandler {
                 fc.getInt("ircReconnectDelay"),
                 fc.getString("ircCommandPrefix"),
                 fc.getString("minecraftPrefix"),
-                fc.getString("ircPrefix")
+                fc.getString("ircPrefix"),
+                fc.getString("serverSpawn")
         );
     }
 

@@ -3,8 +3,8 @@ package xyz.crafttogether.craftcore.discord;
 import xyz.crafttogether.craftcore.configuration.ConfigHandler;
 
 public class VerifyCode {
-    private String code;
-    private long timeCreated;
+    private final String code;
+    private final long timeCreated;
 
     public VerifyCode(String code, long timeCreated) {
         this.code = code;

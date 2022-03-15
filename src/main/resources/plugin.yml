@@ -11,3 +11,6 @@ commands:
   unlink:
     description: Unlink your discord account from your minecraft account
     usage: /<command>
+  spawn:
+    description: Teleports you to spawn
+    usage: /<command>

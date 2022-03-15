@@ -18,6 +18,7 @@ import xyz.crafttogether.craftcore.discord.VerifyExpireTask;
 import xyz.crafttogether.craftcore.discord.commands.LinkCommand;
 import xyz.crafttogether.craftcore.discord.commands.UnlinkCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.MinecraftUnlinkCommand;
+import xyz.crafttogether.craftcore.minecraft.commands.SpawnCommand;
 import xyz.crafttogether.craftcore.minecraft.commands.VerifyCommand;
 import xyz.crafttogether.craftcore.minecraft.listeners.PlayerMove;
 import xyz.crafttogether.craftcore.minecraft.listeners.PlayerMoveBlock;
@@ -57,6 +58,7 @@ public class CraftCore extends JavaPlugin {
         // Minecraft command registering
         getCommand("verify").setExecutor(new VerifyCommand());
         getCommand("unlink").setExecutor(new MinecraftUnlinkCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
         registerEvents();
 
         // command handler
