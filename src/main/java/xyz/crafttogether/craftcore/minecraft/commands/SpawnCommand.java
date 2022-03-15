@@ -1,6 +1,5 @@
 package xyz.crafttogether.craftcore.minecraft.commands;
 
-import net.dv8tion.jda.api.entities.User;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,7 +14,7 @@ import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if (!(commandSender instanceof User)) {
+        if (!(commandSender instanceof Player)) {
             commandSender.sendMessage(ChatColor.RED + "This command must be executed as a player");
             return true;
         }
