@@ -89,7 +89,7 @@ public class CraftCore extends JavaPlugin {
             @Override
             public void run() {
                 for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
-                    if (warmup.getWarmup() + warmup.getScheduledTime() > System.currentTimeMillis() / 1000) {
+                    if (warmup.getWarmup() + warmup.getScheduledTime() < System.currentTimeMillis() / 1000) {
                         warmup.getCallback().callback(true);
                         WarmupHandler.removeWarmup(warmup);
                     }
