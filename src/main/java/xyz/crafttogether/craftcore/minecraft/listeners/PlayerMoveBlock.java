@@ -6,13 +6,17 @@ import xyz.crafttogether.craftcore.minecraft.events.PlayerMoveBlockEvent;
 import xyz.crafttogether.craftcore.minecraft.utils.Warmup;
 import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
+import java.util.Iterator;
+
 public class PlayerMoveBlock implements Listener {
     @EventHandler
     public void playerMoveBlockEvent(PlayerMoveBlockEvent event) {
-        for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
+        Iterator<Warmup> it = WarmupHandler.getCommandWarmups().iterator();
+        while (it.hasNext()) {
+            Warmup warmup = it.next();
             if (warmup.getPlayer().getUniqueId().equals(event.getPlayer().getUniqueId())) {
                 warmup.getCallback().callback(false);
-                WarmupHandler.removeWarmup(warmup);
+                it.remove();
             }
         }
     }

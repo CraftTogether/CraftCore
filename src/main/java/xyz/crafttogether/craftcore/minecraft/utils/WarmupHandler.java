@@ -11,21 +11,15 @@ public class WarmupHandler {
     private static final List<Warmup> commandWarmups = new ArrayList<>();
 
     public static void schedule(Player player, int warmup, WarmupCallback warmupCallback) {
-        synchronized (commandWarmups) {
-            commandWarmups.add(new Warmup(player, warmup, warmupCallback, System.currentTimeMillis() / 1000));
-        }
+        commandWarmups.add(new Warmup(player, warmup, warmupCallback, System.currentTimeMillis() / 1000));
         player.sendMessage(ChatColor.GREEN + "You will be teleported in " + warmup + " seconds, do NOT move");
     }
 
     public static synchronized List<Warmup> getCommandWarmups() {
-        synchronized (commandWarmups) {
-            return commandWarmups;
-        }
+        return commandWarmups;
     }
 
     public static void removeWarmup(Warmup warmup) {
-        synchronized (commandWarmups) {
-            commandWarmups.remove(warmup);
-        }
+        commandWarmups.remove(warmup);
     }
 }

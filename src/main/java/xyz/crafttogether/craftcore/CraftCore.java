@@ -88,10 +88,12 @@ public class CraftCore extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimer(this, new TimerTask() {
             @Override
             public void run() {
-                for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
+                Iterator<Warmup> it = WarmupHandler.getCommandWarmups().iterator();
+                while (it.hasNext()) {
+                    Warmup warmup = it.next();
                     if (warmup.getWarmup() + warmup.getScheduledTime() < System.currentTimeMillis() / 1000) {
                         warmup.getCallback().callback(true);
-                        WarmupHandler.removeWarmup(warmup);
+                        it.remove();
                     }
                 }
             }
