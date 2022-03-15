@@ -10,7 +10,7 @@ public class PlayerMoveBlock implements Listener {
     @EventHandler
     public void playerMoveBlockEvent(PlayerMoveBlockEvent event) {
         for (Warmup warmup : WarmupHandler.getCommandWarmups()) {
-            if (warmup.getPlayerUUID().equals(event.getPlayer().getUniqueId())) {
+            if (warmup.getPlayer().getUniqueId().equals(event.getPlayer().getUniqueId())) {
                 warmup.getCallback().callback(false);
             }
         }
