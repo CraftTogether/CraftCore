@@ -17,7 +17,7 @@ public class SetSpawnCommand implements CommandExecutor {
             return true;
         }
         Player p = (Player) commandSender;
-        if (p.hasPermission("craftcore.setspawn")) {
+        if (p.hasPermission("craftcore.setspawn") || p.isOp()) {
             Location spawn = p.getLocation();
             DataHandler.setSpawnLocation(spawn);
             p.sendMessage(ChatColor.GREEN + "Sever spawn has been set to " + spawn.getBlockX() + ", " +
