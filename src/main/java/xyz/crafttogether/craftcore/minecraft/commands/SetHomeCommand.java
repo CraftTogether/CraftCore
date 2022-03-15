@@ -23,7 +23,7 @@ public class SetHomeCommand implements CommandExecutor {
         }
         Location l = p.getLocation();
         DataHandler.setHomeLocation(p.getUniqueId(), l);
-        p.sendMessage("Your home has been set at: " + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ());
+        p.sendMessage(ChatColor.GREEN + "Your home has been set at: " + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ());
         return true;
     }
 }
