@@ -11,10 +11,24 @@ import xyz.crafttogether.craftcore.discord.VerifyCode;
 import java.time.Instant;
 import java.util.Random;
 
+/**
+ * Discord command which allows the user to link their discord account to their minecraft account
+ */
 public class LinkCommand implements DiscordCommand {
+    /**
+     * The name of the command
+     */
     private static final String COMMAND_NAME = "link";
+    /**
+     * The description of the command
+     */
     private static final String COMMAND_DESCRIPTION = "link your discord account to your minecraft account";
 
+    /**
+     * Method invoked when the link slash command is executed
+     *
+     * @param event The SlashCommandInteractionEvent object
+     */
     @Override
     public void invoke(SlashCommandInteractionEvent event) {
         if (CraftCore.doesCodeAlreadyExists(event.getUser().getIdLong())) {
@@ -44,11 +58,21 @@ public class LinkCommand implements DiscordCommand {
                 .queue();
     }
 
+    /**
+     * Gets the command name
+     *
+     * @return The command name
+     */
     @Override
     public String getCommandName() {
         return COMMAND_NAME;
     }
 
+    /**
+     * Gets the command description
+     *
+     * @return The command description
+     */
     @Override
     public String getCommandDescription() {
         return COMMAND_DESCRIPTION;

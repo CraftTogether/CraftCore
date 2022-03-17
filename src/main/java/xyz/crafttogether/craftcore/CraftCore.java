@@ -31,32 +31,79 @@ import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * CraftCore plugin, core library for craft together plugins, provides layer of abstraction over certain aspects of
+ * plugin development
+ */
 public class CraftCore extends JavaPlugin {
+    /**
+     * Hashmap containing the verification codes for discord ids
+     */
     public static final HashMap<Long, VerifyCode> verify = new HashMap<>();
+    /**
+     * SLF4J Logger instance
+     */
     private static final Logger logger = LoggerFactory.getLogger(CraftCore.class);
+    /**
+     * Latest version of the config, DO NOT TOUCH
+     */
     private static final int CONFIG_VERSION = 1;
+    /**
+     * Hashmap containing all the discord commands
+     */
     private static final HashMap<String, DiscordCommand> discordCommands = new HashMap<>();
+    /**
+     * Static instance of the plugin
+     */
     private static JavaPlugin plugin;
+    /**
+     * Static JDA instance
+     */
     private static JDA jda;
-    // verification checking
+    /**
+     * Timer which is used to check if the verification code has expired
+     */
     private static Timer verificationTimer;
 
+    /**
+     * Gets the plugin instace
+     *
+     * @return The plugin instance
+     */
     public static JavaPlugin getPlugin() {
         return plugin;
     }
 
+    /**
+     * Gets the current config version, used to check whether the config file is outdated
+     *
+     * @return The current config version
+     */
     public static int getRequiredConfigVersion() {
         return CONFIG_VERSION;
     }
 
+    /**
+     * Unloads the plugin
+     */
     public static void unload() {
         getPlugin().getPluginLoader().disablePlugin(getPlugin());
     }
 
+    /**
+     * Gets the static JDA instance
+     *
+     * @return The static JDA instance
+     */
     public static JDA getJda() {
         return jda;
     }
 
+    /**
+     * Adds event listener(s) to the event list
+     *
+     * @param eventListeners The event listener which you would like to register
+     */
     public static void addListeners(EventListener... eventListeners) {
         if (jda != null) {
             for (EventListener listener : eventListeners) {
@@ -65,27 +112,60 @@ public class CraftCore extends JavaPlugin {
         }
     }
 
+    /**
+     * Adds a discord slash command and adds it to the discord commands hashmap
+     *
+     * @param command The command which you would like to register
+     */
     public static void addDiscordCommand(DiscordCommand command) {
         getJda().upsertCommand(command.getCommandName(), command.getCommandDescription()).queue();
         discordCommands.put(command.getCommandName(), command);
     }
 
+    /**
+     * Checks whether a verification code already exists for a specific discord user
+     *
+     * @param discordId The id of the user
+     * @return Whether that user already has a verification code which is still valid
+     */
     public static boolean doesCodeAlreadyExists(long discordId) {
         return verify.containsKey(discordId);
     }
 
+    /**
+     * Adds a verification code to the HashMap containing all verification codes which are awaiting verification
+     *
+     * @param discordId The id of the discord user
+     * @param code The VerifyCode
+     */
     public static void addVerifyCode(long discordId, VerifyCode code) {
         verify.putIfAbsent(discordId, code);
     }
 
+    /**
+     * Gets the HashMap containing all the verification codes
+     *
+     * @return The HashMap containing all the verification codes
+     */
     public static HashMap<Long, VerifyCode> getVerificationCodes() {
         return verify;
     }
 
+    /**
+     * Removes a verification code from the HashMap
+     *
+     * @param discordId The discorc user id
+     */
     public static void removeVerificationCode(long discordId) {
         verify.remove(discordId);
     }
 
+    /**
+     * Checks whether the verification code is valid
+     *
+     * @param code The verification code
+     * @return An optional containing the discord user id, or an empty optional if the code was invalid
+     */
     public static Optional<Long> verifyCode(String code) {
         for (Map.Entry<Long, VerifyCode> entry : verify.entrySet()) {
             if (entry.getValue().getCode().equals(code)) {
@@ -96,11 +176,20 @@ public class CraftCore extends JavaPlugin {
         return Optional.empty();
     }
 
+    /**
+     * Gets a discord command from the discord commands HashMap
+     *
+     * @param commandName The name of the discord command
+     * @return The DiscordCommand
+     */
     @Nullable
     public static DiscordCommand getDiscordCommand(String commandName) {
         return discordCommands.getOrDefault(commandName, null);
     }
 
+    /**
+     * Invoked when the plugin is enabled
+     */
     @Override
     public void onEnable() {
         plugin = this;
@@ -159,6 +248,9 @@ public class CraftCore extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "CraftCore loaded");
     }
 
+    /**
+     * Invoked when the plugin is disabled
+     */
     @Override
     public void onDisable() {
         verificationTimer.cancel();
@@ -167,6 +259,14 @@ public class CraftCore extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "CraftCore unloaded");
     }
 
+    /**
+     * Gets an account information
+     *
+     * @param type The account type
+     * @param filter The UUID of the minecraft user or the discord user id as a string
+     * @return An optional containing the AccountConnection of that user, if not found then an empty Optional is
+     * returned
+     */
     public Optional<AccountConnection> getAccount(AccountType type, String filter) {
         switch (type) {
             case DISCORD -> {
@@ -188,6 +288,9 @@ public class CraftCore extends JavaPlugin {
         return Optional.empty();
     }
 
+    /**
+     * Register bukkit events
+     */
     private void registerEvents() {
         PluginManager manager = plugin.getServer().getPluginManager();
         manager.registerEvents(new PlayerMove(), this);

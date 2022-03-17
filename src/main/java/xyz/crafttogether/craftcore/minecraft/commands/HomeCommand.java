@@ -12,7 +12,22 @@ import org.jetbrains.annotations.NotNull;
 import xyz.crafttogether.craftcore.data.DataHandler;
 import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
+/**
+ * Command which allows the teleportation of a player to their home set using the SetHomeCommand
+ *
+ * @see SetHomeCommand
+ */
 public class HomeCommand implements CommandExecutor {
+
+    /**
+     * Method invoked when the home command is executed
+     *
+     * @param commandSender The command executor
+     * @param command The command executed
+     * @param s The command label
+     * @param args The command arguments
+     * @return True if the command was successful, otherwise False
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(commandSender instanceof Player)) {

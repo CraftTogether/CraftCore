@@ -17,12 +17,31 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Class which abstracts the connection of accounts
+ */
 public class AccountConnector {
+    /**
+     * SLF4J Logger instance
+     */
     private static final Logger logger = LoggerFactory.getLogger(AccountConnector.class);
+    /**
+     * The path of the accounts.json file
+     */
     private static final String PATH = CraftCore.getPlugin().getDataFolder() + "/accounts.json";
+    /**
+     * List containing all the accounts
+     */
     private static List<AccountConnection> accounts = new ArrayList<>();
+    /**
+     * Gson instance
+     */
     private static final Gson gson = new Gson();
 
+    /**
+     * Loads the accounts json file, or generates a new one if it does not exist, and loads the accounts into the
+     * list of accounts
+     */
     public static void loadAccounts() {
         Path path = Path.of(PATH);
         if (!Files.exists(path)) {
@@ -44,6 +63,9 @@ public class AccountConnector {
         }
     }
 
+    /**
+     * Saves the list of accounts to the accounts.json file
+     */
     public static synchronized void saveAccounts() {
         try (FileWriter writer = new FileWriter(PATH)) {
             writer.write(gson.toJson(accounts));
@@ -53,16 +75,33 @@ public class AccountConnector {
         }
     }
 
+    /**
+     * Adds a new account connection
+     *
+     * @param discordId The discord id of the user
+     * @param minecraftUUID The minecraft UUID of the player
+     */
     public static void addAccount(long discordId, UUID minecraftUUID) {
         AccountConnection account = new AccountConnection(discordId, minecraftUUID.toString());
         accounts.add(account);
         saveAccounts();
     }
 
+    /**
+     * Gets a list of account connections
+     *
+     * @return A list of account connections
+     */
     public static List<AccountConnection> getAccounts() {
         return accounts;
     }
 
+    /**
+     * checks whether an account is already connected using the discord user id
+     *
+     * @param discordId The discord user id
+     * @return Whether the discord user has already connected their minecraft account
+     */
     public static boolean containsAccount(long discordId) {
         for (AccountConnection account : accounts) {
             if (account.getDiscordId() == discordId) {
@@ -72,6 +111,12 @@ public class AccountConnector {
         return false;
     }
 
+    /**
+     * Checks whether an account is already connected using the minecraft player UUID
+     *
+     * @param minecraftUUID The UUID of the minecraft player
+     * @return Whether the minecraft player has already connected their discord account
+     */
     public static boolean containsAccount(UUID minecraftUUID) {
         for (AccountConnection account : accounts) {
             if (account.getMinecraftUUID().equals(minecraftUUID.toString())) {
@@ -81,6 +126,12 @@ public class AccountConnector {
         return false;
     }
 
+    /**
+     * Checks whether an account already exists using the discord user id
+     *
+     * @param minecraftUUID The UUID of the minecraft player as a String
+     * @return Whether the minecraft player has already connected their discord account
+     */
     public static boolean containsAccount(String minecraftUUID) {
         for (AccountConnection account : accounts) {
             if (account.getMinecraftUUID().equals(minecraftUUID)) {
@@ -90,6 +141,12 @@ public class AccountConnector {
         return false;
     }
 
+    /**
+     * Gets an AccountConnection using the discord user id
+     *
+     * @param discordId The users discord id
+     * @return An optional containing the AccountConnection if it exists, otherwise an empty Optional
+     */
     public static Optional<AccountConnection> getAccount(long discordId) {
         for (AccountConnection account : accounts) {
             if (account.getDiscordId() == discordId) {
@@ -99,6 +156,12 @@ public class AccountConnector {
         return Optional.empty();
     }
 
+    /**
+     * Gets an AccountConnection using the minecraft player UUID
+     *
+     * @param minecraftUUID The minecraft players UUID
+     * @return An optional containing the AccountConnection if it exists, otherwise an empty Optional
+     */
     public static Optional<AccountConnection> getAccount(UUID minecraftUUID) {
         for (AccountConnection account : accounts) {
             if (account.getMinecraftUUID().equals(minecraftUUID.toString())) {
@@ -108,6 +171,12 @@ public class AccountConnector {
         return Optional.empty();
     }
 
+    /**
+     * Gets an AccountConnection using the minecraft player UUID as a String
+     *
+     * @param minecraftUUID The minecraft players UUID as a String
+     * @return An Optional containing the AccountConnection if it exists, otherwise an empty Optional
+     */
     public static Optional<AccountConnection> getAccount(String minecraftUUID) {
         for (AccountConnection account : accounts) {
             if (account.getMinecraftUUID().equals(minecraftUUID)) {
@@ -117,6 +186,11 @@ public class AccountConnector {
         return Optional.empty();
     }
 
+    /**
+     * Removes an account connection using the discord user id
+     *
+     * @param discordId The discord users id
+     */
     public static void removeAccount(long discordId) {
         for (int i = 0; i < accounts.size(); i++) {
             if (discordId == accounts.get(i).getDiscordId()) {
@@ -127,6 +201,11 @@ public class AccountConnector {
         }
     }
 
+    /**
+     * Removes an account connection using the minecraft player UUID
+     *
+     * @param minecraftUUID The minecraft players UUID
+     */
     public static void removeAccount(UUID minecraftUUID) {
         for (int i = 0; i < accounts.size(); i++) {
             if (minecraftUUID.toString().equals(accounts.get(i).getMinecraftUUID())) {
@@ -137,6 +216,11 @@ public class AccountConnector {
         }
     }
 
+    /**
+     * Removes an account connection using the minecraft player UUID as a String
+     *
+     * @param minecraftUUID The minecraft player UUID as a String
+     */
     public static void removeAccount(String minecraftUUID) {
         for (int i = 0; i < accounts.size(); i++) {
             if (minecraftUUID.equals(accounts.get(i).getMinecraftUUID())) {

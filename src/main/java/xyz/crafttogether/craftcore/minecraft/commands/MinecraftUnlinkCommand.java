@@ -8,7 +8,20 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.crafttogether.craftcore.connector.AccountConnector;
 
+/**
+ * Command which unlinks your minecraft account with your discord account
+ */
 public class MinecraftUnlinkCommand implements CommandExecutor {
+
+    /**
+     * Method invoked when the unlink command is executed
+     *
+     * @param commandSender The command executor
+     * @param command The command executed
+     * @param s The command label
+     * @param args The command arguments
+     * @return True if the command was handled successfully, otherwise false
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(commandSender instanceof Player)) {

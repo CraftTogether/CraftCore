@@ -9,7 +9,20 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.crafttogether.craftcore.data.DataHandler;
 
+/**
+ * Command which allows a player to set their home to their current position
+ */
 public class SetHomeCommand implements CommandExecutor {
+
+    /**
+     * Method invoked when the set home command is executed
+     *
+     * @param commandSender The command executor
+     * @param command The command executed
+     * @param s The command label
+     * @param args The command arguments
+     * @return True if the command is handled successfully, otherwise false
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(commandSender instanceof Player)) {

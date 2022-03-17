@@ -11,7 +11,20 @@ import org.jetbrains.annotations.NotNull;
 import xyz.crafttogether.craftcore.data.DataHandler;
 import xyz.crafttogether.craftcore.minecraft.utils.WarmupHandler;
 
+/**
+ * Command which teleports the player to spawn (will fail if there is no spawn set on the server)
+ */
 public class SpawnCommand implements CommandExecutor {
+
+    /**
+     * Method invoked when the spawn command is executed
+     *
+     * @param commandSender The command executor
+     * @param command The command executed
+     * @param s The command label
+     * @param args The command arguments
+     * @return True if the command is handled successfully, otherwise false
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(commandSender instanceof Player)) {

@@ -11,7 +11,21 @@ import xyz.crafttogether.craftcore.connector.AccountConnector;
 
 import java.util.Optional;
 
+/**
+ * Command which verifies the minecraft user with their discord verification code, allows the linkage of minecraft
+ * accounts with their discord accounts
+ */
 public class VerifyCommand implements CommandExecutor {
+
+    /**
+     * Method invoked when verify command is executed
+     *
+     * @param commandSender The command executor
+     * @param command The command executed
+     * @param s The command label
+     * @param args The command arguments
+     * @return True if the command is handled successfully, otherwise false
+     */
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(commandSender instanceof Player)) {

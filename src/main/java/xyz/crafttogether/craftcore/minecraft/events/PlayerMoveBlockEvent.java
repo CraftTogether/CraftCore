@@ -18,18 +18,38 @@ public class PlayerMoveBlockEvent extends Event {
      */
     private final Player player;
 
+    /**
+     * Event constructor
+     *
+     * @param player The player whose position has changed
+     */
     public PlayerMoveBlockEvent(Player player) {
         this.player = player;
     }
 
+    /**
+     * Static method which gets the HandlerList
+     *
+     * @return The HandlerList
+     */
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
+    /**
+     * Gets the player whose position has changed
+     *
+     * @return The player whose position has changed
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Gets the HandlerList
+     *
+     * @return The HandlerList
+     */
     @Override
     public @NotNull HandlerList getHandlers() {
         return HANDLERS;

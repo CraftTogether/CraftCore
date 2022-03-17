@@ -4,10 +4,24 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import xyz.crafttogether.craftcore.connector.AccountConnector;
 import xyz.crafttogether.craftcore.discord.DiscordCommand;
 
+/**
+ * Discord command which allows a discord user to unlink their discord account from their minecraft account
+ */
 public class UnlinkCommand implements DiscordCommand {
+    /**
+     * The name of the command
+     */
     private static final String COMMAND_NAME = "unlink";
+    /**
+     * The description of the command
+     */
     private static final String COMMAND_DESCRIPTION = "Unlink your discord account to your minecraft account";
 
+    /**
+     * Method invoked when the unlink command is executed
+     *
+     * @param event The SlashCommandInteractionEvent object
+     */
     @Override
     public void invoke(SlashCommandInteractionEvent event) {
         boolean isLinked = AccountConnector.containsAccount(event.getUser().getIdLong());
