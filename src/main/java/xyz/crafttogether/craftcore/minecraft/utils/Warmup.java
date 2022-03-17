@@ -26,9 +26,9 @@ public class Warmup {
     /**
      * Constructor to create Warmup object
      *
-     * @param player The player which invoked the command which is using the warmup
-     * @param warmup The warmup period in seconds
-     * @param callback The warmup callback
+     * @param player        The player which invoked the command which is using the warmup
+     * @param warmup        The warmup period in seconds
+     * @param callback      The warmup callback
      * @param scheduledTime The time that the warmup was scheduled
      */
     public Warmup(Player player, int warmup, WarmupCallback callback, long scheduledTime) {

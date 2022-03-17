@@ -17,9 +17,9 @@ public class MinecraftUnlinkCommand implements CommandExecutor {
      * Method invoked when the unlink command is executed
      *
      * @param commandSender The command executor
-     * @param command The command executed
-     * @param s The command label
-     * @param args The command arguments
+     * @param command       The command executed
+     * @param s             The command label
+     * @param args          The command arguments
      * @return True if the command was handled successfully, otherwise false
      */
     @Override

@@ -18,9 +18,9 @@ public class SetHomeCommand implements CommandExecutor {
      * Method invoked when the set home command is executed
      *
      * @param commandSender The command executor
-     * @param command The command executed
-     * @param s The command label
-     * @param args The command arguments
+     * @param command       The command executed
+     * @param s             The command label
+     * @param args          The command arguments
      * @return True if the command is handled successfully, otherwise false
      */
     @Override

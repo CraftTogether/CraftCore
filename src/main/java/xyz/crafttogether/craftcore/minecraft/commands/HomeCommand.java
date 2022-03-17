@@ -23,9 +23,9 @@ public class HomeCommand implements CommandExecutor {
      * Method invoked when the home command is executed
      *
      * @param commandSender The command executor
-     * @param command The command executed
-     * @param s The command label
-     * @param args The command arguments
+     * @param command       The command executed
+     * @param s             The command label
+     * @param args          The command arguments
      * @return True if the command was successful, otherwise False
      */
     @Override
@@ -56,7 +56,7 @@ public class HomeCommand implements CommandExecutor {
             WarmupHandler.schedule(p, 5, (successful -> {
                 if (successful) {
                     p.teleport(location);
-                    p.sendMessage(ChatColor.GREEN+ "You have been teleported home");
+                    p.sendMessage(ChatColor.GREEN + "You have been teleported home");
                 } else {
                     p.sendMessage(ChatColor.RED + "You moved, teleportation cancelled");
                 }

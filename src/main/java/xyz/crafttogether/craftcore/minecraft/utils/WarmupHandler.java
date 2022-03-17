@@ -20,8 +20,8 @@ public class WarmupHandler {
      * and successful will be false, or the callback will be called when the warmup period is over, and successful
      * will be true.
      *
-     * @param player The player which invoked the command which has a warmup
-     * @param warmup The time in seconds which the warmup lasts
+     * @param player         The player which invoked the command which has a warmup
+     * @param warmup         The time in seconds which the warmup lasts
      * @param warmupCallback The warmup callback which will be executed when the player either moves or the warmup
      *                       period is over
      */

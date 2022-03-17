@@ -30,13 +30,13 @@ public class AccountConnector {
      */
     private static final String PATH = CraftCore.getPlugin().getDataFolder() + "/accounts.json";
     /**
-     * List containing all the accounts
-     */
-    private static List<AccountConnection> accounts = new ArrayList<>();
-    /**
      * Gson instance
      */
     private static final Gson gson = new Gson();
+    /**
+     * List containing all the accounts
+     */
+    private static List<AccountConnection> accounts = new ArrayList<>();
 
     /**
      * Loads the accounts json file, or generates a new one if it does not exist, and loads the accounts into the
@@ -78,7 +78,7 @@ public class AccountConnector {
     /**
      * Adds a new account connection
      *
-     * @param discordId The discord id of the user
+     * @param discordId     The discord id of the user
      * @param minecraftUUID The minecraft UUID of the player
      */
     public static void addAccount(long discordId, UUID minecraftUUID) {

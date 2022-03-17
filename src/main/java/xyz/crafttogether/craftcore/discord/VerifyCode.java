@@ -18,7 +18,7 @@ public class VerifyCode {
     /**
      * Constructor to create VerifyCode object
      *
-     * @param code The verification code
+     * @param code        The verification code
      * @param timeCreated The time the verification code was created, in unix millis
      */
     public VerifyCode(String code, long timeCreated) {

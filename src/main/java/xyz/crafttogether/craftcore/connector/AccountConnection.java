@@ -16,7 +16,7 @@ public class AccountConnection {
     /**
      * Constructor to create AccountConnection object
      *
-     * @param discordId The discord id of the user
+     * @param discordId     The discord id of the user
      * @param minecraftUUID The minecraft UUID of the player
      */
     public AccountConnection(long discordId, String minecraftUUID) {

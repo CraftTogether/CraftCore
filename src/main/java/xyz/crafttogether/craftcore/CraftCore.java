@@ -136,7 +136,7 @@ public class CraftCore extends JavaPlugin {
      * Adds a verification code to the HashMap containing all verification codes which are awaiting verification
      *
      * @param discordId The id of the discord user
-     * @param code The VerifyCode
+     * @param code      The VerifyCode
      */
     public static void addVerifyCode(long discordId, VerifyCode code) {
         verify.putIfAbsent(discordId, code);
@@ -262,7 +262,7 @@ public class CraftCore extends JavaPlugin {
     /**
      * Gets an account information
      *
-     * @param type The account type
+     * @param type   The account type
      * @param filter The UUID of the minecraft user or the discord user id as a string
      * @return An optional containing the AccountConnection of that user, if not found then an empty Optional is
      * returned
